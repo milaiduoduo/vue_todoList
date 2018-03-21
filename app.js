@@ -1,10 +1,22 @@
-let list = [
-    {
-        title:'吃串串',
-        isChecked:true,
-        editing:false
+let store = {
+    save(key,value){
+        localStorage.setItem(key,JSON.stringify(value));
+    },
+    fetch(key){
+        return JSON.parse(localStorage.getItem(key)) || [];
     }
-];
+}
+
+// let list = [
+//     {
+//         title:'吃串串',
+//         isChecked:true,
+//         editing:false
+//     }
+// ];
+
+
+let list = store.fetch("vue-todolist1");
 
 let filteredList = {
     all:function(list){
@@ -31,6 +43,14 @@ let vm = new Vue({
         todoItem: '',
         beforeEdit:'',
         optionHash:'all'
+    },
+    watch:{
+        list:{
+            handler:function(){
+                store.save("vue-todolist1",this.list)
+            },
+            deep:true
+        }
     },
     methods: {
         addTodoItem(){
