@@ -1,8 +1,8 @@
 let list=[
-    {
-        title:'吃串串',
-
-    }
+    // {
+    //     title:'吃串串',
+    //     isChecked:true
+    // }
 ]
 
 let vm = new Vue({
@@ -13,7 +13,11 @@ let vm = new Vue({
     },
     methods:{
         addTodoItem(){
-            this.list.push({title:this.todoItem})
+            this.list.push({
+                title:this.todoItem,
+                isChecked:false
+            })
+            this.todoItem = ''
         }
     }
 })
