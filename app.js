@@ -18,6 +18,10 @@ let vm = new Vue({
                 isChecked: false
             })
             this.todoItem = ''
+        },
+        deleteTodo(item){
+            let index = this.list.indexOf(item);
+            this.list.splice(index,1);
         }
     },
     computed: {

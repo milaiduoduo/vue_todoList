@@ -43,7 +43,7 @@
                            v-model="item.isChecked"
                     >
                     <label>{{item.title}}</label>
-                    <button class="destroy"></button>
+                    <button class="destroy" @click="deleteTodo(item)"></button>
                 </div>
                 <input type="text"
                        class="edit"
