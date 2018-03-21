@@ -1,4 +1,4 @@
-let list=[
+let list = [
     // {
     //     title:'吃串串',
     //     isChecked:true
@@ -6,18 +6,25 @@ let list=[
 ]
 
 let vm = new Vue({
-    el:'.main',
-    data:{
-        list:list,
-        todoItem:''
+    el: '.main',
+    data: {
+        list: list,
+        todoItem: ''
     },
-    methods:{
+    methods: {
         addTodoItem(){
             this.list.push({
-                title:this.todoItem,
-                isChecked:false
+                title: this.todoItem,
+                isChecked: false
             })
             this.todoItem = ''
+        }
+    },
+    computed: {
+        noCheckedItemLength(){
+            return this.list.filter(function (item) {
+                return !item.isChecked
+            }).length
         }
     }
 })

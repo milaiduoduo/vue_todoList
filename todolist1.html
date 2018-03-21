@@ -21,7 +21,7 @@
            @keyup.enter="addTodoItem"
     />
     <ul class="task-count">
-        <li>个未完成任务</li>
+        <li>{{noCheckedItemLength}}个未完成任务</li>
         <li class="action">
             <a class="active" href="#all">所有任务</a>
             <a href="#unfinished">未完成任务</a>
