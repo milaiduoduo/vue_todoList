@@ -15,13 +15,17 @@ let vm = new Vue({
         addTodoItem(){
             this.list.push({
                 title: this.todoItem,
-                isChecked: false
+                isChecked: false,
+                editing:false
             })
             this.todoItem = ''
         },
         deleteTodo(item){
             let index = this.list.indexOf(item);
             this.list.splice(index,1);
+        },
+        editTodoItem(item){
+            item.editing = true;
         }
     },
     computed: {
