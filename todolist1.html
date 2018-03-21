@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>my todoList</title>
     <link rel="stylesheet" href="index.css">
     <script src="vue.js"></script>
 </head>
@@ -23,9 +23,9 @@
     <ul class="task-count">
         <li>{{noCheckedItemLength}}个未完成任务</li>
         <li class="action">
-            <a class="active" href="#all">所有任务</a>
-            <a href="#unfinished">未完成任务</a>
-            <a href="#finished">已完成任务</a>
+            <a :class="{active:optionHash==='all'}" href="#all">所有任务</a>
+            <a :class="{active:optionHash==='unfinished'}"  href="#unfinished">未完成任务</a>
+            <a :class="{active:optionHash==='finished'}"  href="#finished">已完成任务</a>
         </li>
     </ul>
     <h3 class="big-title">任务列表:</h3>
@@ -34,8 +34,7 @@
         <ul class="todo-list">
             <li class="todo"
                 :class="{completed:item.isChecked,editing:item.editing}"
-                v-for="item in list"
-
+                v-for="item in cFilteredList"
             >
                 <div class="view">
                     <input type="checkbox"

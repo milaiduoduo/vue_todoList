@@ -4,14 +4,33 @@ let list = [
         isChecked:true,
         editing:false
     }
-]
+];
+
+let filteredList = {
+    all:function(list){
+        return list;
+    },
+    finished:function(list){
+        return list.filter(item=>{
+            return item.isChecked;
+        })
+    },
+    unfinished:function(list) {
+      return list.filter(item=>{
+          return !item.isChecked;
+      })
+    }
+}
+
+
 
 let vm = new Vue({
     el: '.main',
     data: {
         list: list,
         todoItem: '',
-        beforeEdit:''
+        beforeEdit:'',
+        optionHash:'all'
     },
     methods: {
         addTodoItem(){
@@ -42,7 +61,14 @@ let vm = new Vue({
         noCheckedItemLength(){
             return this.list.filter(function (item) {
                 return !item.isChecked
-            }).length
+            }).length;
+        },
+        cFilteredList(){
+            console.log('this.optionHash: ',this.optionHash);
+            let list1 = filteredList[this.optionHash](list);
+            console.log('filtered list: ',list1);
+            return list1;
+            // return filteredList[this.optionHash] ? filteredList[this.optionHash](list) : list;
         }
     },
     directives:{
@@ -54,4 +80,14 @@ let vm = new Vue({
             }
         }
     }
-})
+});
+
+
+window.addEventListener("hashchange",watchHashChange);
+
+function watchHashChange(){
+    let hash = window.location.hash.slice(1) ? window.location.hash.slice(1):'all';
+    vm.optionHash = hash;
+}
+
+this.watchHashChange();
