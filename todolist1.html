@@ -45,9 +45,14 @@
                     <label @dblclick="editTodoItem(item)">{{item.title}}</label>
                     <button class="destroy" @click="deleteTodo(item)"></button>
                 </div>
-                <input type="text"
-                       class="edit"
-                       v-model="item.title"
+                <input
+                        v-foucs="item.editing"
+                        type="text"
+                        class="edit"
+                        v-model="item.title"
+                        @blur="editFinished(item)"
+                        @keyup.enter="editFinished(item)"
+                        @keyup.esc="cancelEditItem(item)"
                 >
             </li>
         </ul>

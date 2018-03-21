@@ -1,15 +1,17 @@
 let list = [
-    // {
-    //     title:'吃串串',
-    //     isChecked:true
-    // }
+    {
+        title:'吃串串',
+        isChecked:true,
+        editing:false
+    }
 ]
 
 let vm = new Vue({
     el: '.main',
     data: {
         list: list,
-        todoItem: ''
+        todoItem: '',
+        beforeEdit:''
     },
     methods: {
         addTodoItem(){
@@ -26,6 +28,14 @@ let vm = new Vue({
         },
         editTodoItem(item){
             item.editing = true;
+            this.beforeEdit = item.title;
+        },
+        editFinished(item){
+            item.editing = false;
+        },
+        cancelEditItem(item){
+            item.title = this.beforeEdit;
+            item.editing = false;
         }
     },
     computed: {
@@ -33,6 +43,15 @@ let vm = new Vue({
             return this.list.filter(function (item) {
                 return !item.isChecked
             }).length
+        }
+    },
+    directives:{
+        "foucs":{
+            update(el,binding){
+                if(binding.value){
+                    el.focus();
+                }
+            }
         }
     }
 })
